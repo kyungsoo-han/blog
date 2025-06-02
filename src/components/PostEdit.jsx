@@ -78,8 +78,7 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
     }
 
     setIsSubmitting(true);
-    // 제목은 기존 postToEdit.title 또는 useEffect에서 설정된 title 상태 값을 사용
-    const finalTitle = title; // useEffect에서 설정된 초기 제목 사용
+    const finalTitle = title;
     const fullMdContent = `# ${finalTitle}\n\n${content}`;
     const filePath = `${postToEdit.sourceDir}/${postToEdit.name}`;
 
@@ -90,17 +89,22 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
     }
 
     try {
-      const response = await fetch(`${API_HANDLER_URL}/update-post`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          filePath: filePath,
-          newContent: fullMdContent,
-          commitMessage: `Update post: ${finalTitle}`, // 커밋 메시지에도 기존 제목 사용
-          sha: postToEdit.sha,
-        }),
-      });
+      const response = await fetch(
+        // ★★★ 경로 수정: /api 접두사 추가 ★★★
+        `${API_HANDLER_URL}/api/update-post`, // 기존: `${API_HANDLER_URL}/update-post`
+        {
+          method: "POST", // server.js에서 app.post로 정의했으므로 POST 유지
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filePath: filePath,
+            newContent: fullMdContent,
+            commitMessage: `Update post: ${finalTitle}`,
+            sha: postToEdit.sha,
+          }),
+        },
+      );
 
+      // ... (응답 처리 로직은 기존과 동일) ...
       const responseData = await response.json();
       if (response.ok) {
         alert(
@@ -109,11 +113,13 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
         if (onUpdateSuccess) {
           const updatedPostData = {
             ...postToEdit,
-            title: finalTitle, // 제목은 변경되지 않음
+            title: finalTitle,
             preview: content.substring(0, 150) + "...",
             sha:
               responseData.newSha ||
-              (responseData.content && responseData.content.sha) ||
+              (responseData.data &&
+                responseData.data.content &&
+                responseData.data.content.sha) || // API 응답 구조에 따라 newSha를 가져오는 부분
               postToEdit.sha,
           };
           onUpdateSuccess(updatedPostData);
@@ -121,8 +127,10 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
           onNavigate("list");
         }
       } else {
+        // API 응답의 에러 메시지를 사용하도록 수정
         throw new Error(
           responseData.message ||
+            responseData.errorDetails?.message || // 좀 더 구체적인 에러 메시지가 있다면
             `글 수정 실패 (서버 상태: ${response.status})`,
         );
       }
