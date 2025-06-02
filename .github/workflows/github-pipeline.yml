@@ -1,0 +1,59 @@
+name: Deploy Vite React App
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  SERVER_IP: 39.117.246.63
+  REMOTE_USER: root
+  REMOTE_DIR: /app/servers/blog
+  PORT: 50011
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vite App
+        run: npm run build
+
+      - name: Deploy and Run
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+
+          echo "🛑 Killing existing process on port $PORT..."
+          ssh -i private_key.pem -o StrictHostKeyChecking=no $REMOTE_USER@$SERVER_IP "
+            PID=\$(lsof -ti tcp:$PORT)
+            if [ ! -z \"\$PID\" ]; then
+              echo \"Killing process \$PID\";
+              kill -9 \$PID;
+            else
+              echo \"No process found on port $PORT.\";
+            fi
+          "
+
+          echo "📂 Cleaning up and copying files to $REMOTE_DIR..."
+          ssh -i private_key.pem -o StrictHostKeyChecking=no $REMOTE_USER@$SERVER_IP "
+            rm -rf $REMOTE_DIR && mkdir -p $REMOTE_DIR
+          "
+
+          echo "📤 Uploading dist/ to server..."
+          scp -i private_key.pem -r ./dist/* $REMOTE_USER@$SERVER_IP:$REMOTE_DIR/
+
+          echo "🚀 Starting app via serve on port $PORT..."
+          ssh -i private_key.pem -o StrictHostKeyChecking=no $REMOTE_USER@$SERVER_IP "
+            cd $REMOTE_DIR &&
+            nohup npx serve -s . -l $PORT > serve.log 2>&1 &
+          "
+
+          echo "✅ Deployed! Visit: http://$SERVER_IP:$PORT"
