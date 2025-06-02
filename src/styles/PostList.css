@@ -1,0 +1,89 @@
+/* src/styles/PostList.css */
+.post-list {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+}
+
+.post-list h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.posts { /* .post-list 내부의 글 목록 컨테이너 */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.post-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-item:hover {
+    background-color: #f8f8f8;
+}
+
+.post-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.post-item .post-meta { /* PostList 컴포넌트 내 post-item의 메타 정보 스타일 */
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+.post-item .post-preview { /* PostList 컴포넌트 내 post-item의 미리보기 */
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.page-btn:hover:not(:disabled) {
+    background-color: #f0f0f0;
+    border-color: #0066cc;
+    color: #0066cc;
+}
+
+.page-btn.active {
+    background-color: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

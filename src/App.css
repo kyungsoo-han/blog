@@ -15,119 +15,126 @@ body {
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
     color: #333;
-    background-color: #f5f5f5;
-    /* Ensure body takes full height for footer positioning */
+    background-color: #f8f9fa; /* 약간 더 밝은 회색 배경 */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 .app {
-    min-height: 100vh; /* 최소 화면 높이를 채우도록 */
     display: flex;
-    flex-direction: column; /* 자식 요소(header, main, footer)를 수직으로 정렬 */
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1200px; /* 최대 너비 */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* 좌우 패딩 */
 }
 
 /* 헤더 스타일 */
 .header {
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 그림자 약간 연하게 */
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000; /* 다른 요소 위에 오도록 */
+    width: 100%;
 }
 
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    height: 60px; /* 헤더 높이 고정 */
+    padding: 0 20px;
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.75rem; /* 로고 크기 약간 키움 */
+    font-weight: 700; /* 굵게 */
+    color: #343a40; /* 어두운 회색 */
     cursor: pointer;
-    transition: color 0.3s;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
 }
 
 .logo:hover {
-    color: #0066cc;
+    color: #007bff; /* 호버 시 파란색 */
 }
 
 .nav {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem; /* 버튼 사이 간격 약간 줄임 */
 }
 
 .nav-btn {
     padding: 0.5rem 1rem;
     border: none;
     background: none;
-    color: #666;
+    color: #495057; /* 약간 연한 회색 */
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s;
+    font-weight: 500;
     border-radius: 4px;
+    transition: all 0.2s ease-in-out;
 }
 
 .nav-btn:hover {
-    color: #0066cc;
-    background-color: #f0f0f0;
+    color: #007bff;
+    background-color: #e9ecef; /* 호버 시 배경색 */
 }
 
 .nav-btn.active {
-    color: #0066cc;
+    color: #007bff;
     font-weight: 600;
 }
 
 /* 메인 컨텐츠 영역 */
 .main {
-    flex: 1 0 auto; /* header와 footer를 제외한 나머지 공간을 모두 차지하도록 */
+    flex: 1 0 auto; /* 푸터가 하단에 고정되도록 */
     padding: 2rem 0;
+    background-color: #f8f9fa;
 }
 
 /* 홈 페이지 스타일 */
 .home {
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .hero {
     text-align: center;
-    padding: 3rem 0;
-    background-color: #fff;
+    padding: 3rem 1.5rem;
+    background-color: #ffffff;
     border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .hero h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #343a40;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    color: #666;
+    font-size: 1.25rem;
+    color: #6c757d;
 }
 
 .recent-posts h3 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #343a40;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
 }
 
 .post-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -135,59 +142,64 @@ body {
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .post-card h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #343a40;
+    line-height: 1.4;
 }
 
-.post-date {
-    font-size: 0.9rem;
-    color: #999;
-    margin-bottom: 0.5rem;
+.post-date { /* Home, PostView 등에서 사용 */
+    font-size: 0.875rem;
+    color: #868e96;
+    margin-bottom: 0.75rem;
 }
 
 .post-preview {
-    color: #666;
+    color: #495057;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    flex-grow: 1;
 }
 
 /* 글 목록 스타일 */
 .post-list {
     max-width: 800px;
     margin: 0 auto;
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .post-list h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: #343a40;
+    text-align: center;
 }
 
 .posts {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     overflow: hidden;
 }
 
 .post-item {
-    padding: 1.5rem;
-    border-bottom: 1px solid #eee;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e9ecef;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .post-item:last-child {
@@ -195,19 +207,19 @@ body {
 }
 
 .post-item:hover {
-    background-color: #f8f8f8;
+    background-color: #f8f9fa;
 }
 
 .post-item h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
-    color: #333;
+    color: #343a40;
 }
 
-.post-meta {
+.post-meta { /* PostList에서 날짜 부분 */
     font-size: 0.9rem;
-    color: #999;
-    margin-bottom: 0.5rem;
+    color: #868e96;
+    margin-bottom: 0.75rem;
 }
 
 /* 페이지네이션 */
@@ -215,428 +227,440 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
 }
 
 .page-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid #dee2e6;
     background-color: #fff;
-    color: #666;
+    color: #495057;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.3s;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
 }
 
 .page-btn:hover:not(:disabled) {
-    background-color: #f0f0f0;
-    border-color: #0066cc;
-    color: #0066cc;
+    background-color: #e9ecef;
+    border-color: #007bff;
+    color: #007bff;
 }
 
 .page-btn.active {
-    background-color: #0066cc;
+    background-color: #007bff;
     color: #fff;
-    border-color: #0066cc;
+    border-color: #007bff;
 }
 
 .page-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
 /* 글 보기 레이아웃 */
 .post-view-layout {
     display: flex;
-    justify-content: center; /* Adjust as needed */
+    justify-content: center;
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    animation: fadeIn 0.5s ease;
-    align-items: flex-start; /* Align items to the top */
+    animation: fadeIn 0.5s ease-out;
+    align-items: flex-start;
 }
 
-/* 글 보기 스타일 */
 .post-view {
-    flex-grow: 1; /* Allows it to take up available space */
-    max-width: 800px; /* Constrain main content width */
+    flex-grow: 1;
+    max-width: 800px;
+    min-width: 0;
     background-color: #fff;
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .post-view-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #eee;
+    border-bottom: 1px solid #e9ecef;
 }
 
-.post-view .post-date {
-    font-size: 1rem;
-    color: #666;
+.post-view .post-date { /* PostView 내부의 날짜 */
+    font-size: 0.95rem;
+    color: #6c757d;
     margin: 0;
 }
 
-.back-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
+.post-view-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.back-btn, .edit-btn {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #6c757d;
     background-color: #fff;
-    color: #666;
+    color: #495057;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .back-btn:hover {
-    background-color: #f0f0f0;
-    border-color: #0066cc;
-    color: #0066cc;
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
 }
 
-.post-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #444;
+.edit-btn {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.edit-btn:hover {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+/* .post-content 와 .content-preview 공통 스타일 (마크다운 렌더링) */
+.post-content,
+.content-preview {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #343a40;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-    margin: 1.5rem 0 1rem;
-    color: #333;
+.post-content h1, .content-preview h1,
+.post-content h2, .content-preview h2,
+.post-content h3, .content-preview h3,
+.post-content h4, .content-preview h4,
+.post-content h5, .content-preview h5,
+.post-content h6, .content-preview h6 {
+    margin: 2rem 0 1rem;
+    color: #212529;
+    line-height: 1.4;
+    font-weight: 600;
 }
 
-.post-content h1 {
-    font-size: 1.8rem;
+.post-content h1, .content-preview h1 { font-size: 2em; }
+.post-content h2, .content-preview h2 { font-size: 1.75em; }
+.post-content h3, .content-preview h3 { font-size: 1.5em; }
+.post-content h4, .content-preview h4 { font-size: 1.25em; }
+.post-content h5, .content-preview h5 { font-size: 1.1em; }
+.post-content h6, .content-preview h6 { font-size: 1em; color: #6c757d; }
+
+
+.post-content p, .content-preview p {
+    margin-bottom: 1.25rem;
 }
 
-.post-content h2 {
-    font-size: 1.5rem;
+.post-content ul, .content-preview ul,
+.post-content ol, .content-preview ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
 }
 
-.post-content h3 {
-    font-size: 1.3rem;
+.post-content li, .content-preview li {
+    margin-bottom: 0.6rem;
 }
 
-.post-content p {
-    margin-bottom: 1rem;
-}
-
-.post-content ul,
-.post-content ol {
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-}
-
-.post-content li {
-    margin-bottom: 0.5rem;
-}
-
-/* 글보기와 미리보기 공통 스타일 */
-.post-content p,
-.content-preview p {
-    margin-bottom: 1rem;
-    line-height: 1.8;
-}
-
-.post-content ul,
-.post-content ol,
-.content-preview ul,
-.content-preview ol {
-    margin: 1rem 0;
-    padding-left: 2rem;
-}
-
-.post-content li,
-.content-preview li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
-}
-
-.post-content ul ul,
-.post-content ol ol,
-.post-content ul ol,
-.post-content ol ul,
-.content-preview ul ul,
-.content-preview ol ol,
-.content-preview ul ol,
-.content-preview ol ul {
+.post-content ul ul, .content-preview ul ul,
+.post-content ol ol, .content-preview ol ol,
+.post-content ul ol, .content-preview ul ol,
+.post-content ol ul, .content-preview ol ul {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
-.post-content a,
-.content-preview a {
-    color: #0066cc;
+.post-content a, .content-preview a {
+    color: #007bff;
     text-decoration: none;
-    word-break: break-word;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+    transition: color 0.2s, border-color 0.2s;
 }
 
-.post-content a:hover,
-.content-preview a:hover {
-    text-decoration: underline;
+.post-content a:hover, .content-preview a:hover {
+    color: #0056b3;
+    border-bottom-color: #0056b3;
 }
 
-.post-content strong,
-.content-preview strong {
+.post-content strong, .content-preview strong {
     font-weight: 600;
-    color: #333;
+    color: #343a40;
 }
 
-.post-content em,
-.content-preview em {
+.post-content em, .content-preview em {
     font-style: italic;
+    color: #495057;
 }
 
-/* 코드 블럭 스타일 */
-.post-content pre,
-.content-preview pre {
-    background-color: #f6f8fa;
+.post-content pre, .content-preview pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
     border-radius: 6px;
-    padding: 1rem;
+    padding: 1.25rem;
     overflow-x: auto;
-    margin: 1rem 0;
-    border: 1px solid #e1e4e8;
-    line-height: 1.45;
+    margin: 1.5rem 0;
+    border: 1px solid #444;
+    line-height: 1.5;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9rem;
     white-space: pre;
 }
 
-.post-content pre code,
-.content-preview pre code {
+.post-content pre code, .content-preview pre code {
     background: none;
     padding: 0;
-    font-size: 0.9rem;
-    color: #24292e;
+    color: inherit;
+    font-size: inherit;
     line-height: inherit;
     display: block;
-    overflow-x: auto;
-    white-space: pre;
+    white-space: inherit;
 }
 
-.post-content code,
-.content-preview code {
-    background-color: #f3f4f6;
-    padding: 0.2rem 0.4rem;
+.post-content code, .content-preview code { /* 인라인 코드 */
+    background-color: #e9ecef;
+    color: #c7254e;
+    padding: 0.2em 0.4em;
     border-radius: 3px;
-    font-family: "Consolas", "Monaco", "Courier New", monospace;
-    font-size: 0.85em;
-    color: #e01e5a;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.875em;
     white-space: nowrap;
 }
+.post-content pre code.language-plaintext,
+.content-preview pre code.language-plaintext {
+    color: #f8f8f2;
+}
 
-/* 표 스타일 */
+/* 테이블 래퍼 및 테이블 스타일 (PostView와 Preview 공통 적용) */
 .table-wrapper {
     overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
+    margin: 1.5rem 0;
+    border: 1px solid #dee2e6; /* 래퍼 자체의 테두리 */
+    border-radius: 6px;
 }
 
 .table-wrapper table {
-    min-width: 300px; /* 필요 시 조정 가능 */
-    width: max-content;
-    border-collapse: collapse;
-    margin: 1rem 0;
+    width: 100%; /* 래퍼가 스크롤을 담당 */
+    min-width: 500px; /* 테이블 내용이 많을 경우 최소 너비 */
+    border-collapse: collapse; /* 테두리 선 겹침 처리 */
     font-size: 0.95rem;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.post-content table th,
-.post-content table td,
-.content-preview table th,
-.content-preview table td {
-    padding: 0.75rem;
+.post-content table th, .post-content table td,
+.content-preview table th, .content-preview table td {
+    padding: 0.8rem 1rem; /* 셀 패딩 */
     text-align: left;
-    border: 1px solid #e1e4e8;
+    border: 1px solid #e0e0e0; /* 셀 테두리 */
     line-height: 1.5;
 }
 
 .post-content table th,
 .content-preview table th {
-    background-color: #f6f8fa;
+    background-color: #f8f9fa; /* 헤더 셀 배경색 */
     font-weight: 600;
-    color: #24292e;
+    color: #343a40;
 }
 
-.post-content table tr:nth-child(even),
-.content-preview table tr:nth-child(even) {
-    background-color: #f6f8fa;
+.post-content table tr:nth-child(even) td,
+.content-preview table tr:nth-child(even) td { /* 짝수 행 배경색 */
+    background-color: #fcfcfc;
 }
 
-.post-content table tr:hover,
-.content-preview table tr:hover {
-    background-color: #f3f4f6;
+.post-content table tr:hover td,
+.content-preview table tr:hover td { /* 행 호버 시 배경색 */
+    background-color: #f1f3f5;
 }
 
-/* 인용구 스타일 */
-.post-content blockquote,
-.content-preview blockquote {
-    border-left: 4px solid #dfe2e5;
-    padding-left: 1rem;
-    margin: 1rem 0;
-    color: #6a737d;
-    font-style: italic;
+.post-content blockquote, .content-preview blockquote {
+    border-left: 5px solid #007bff;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background-color: #f8f9fa;
+    color: #495057;
+    font-style: normal;
+    border-radius: 0 4px 4px 0;
+}
+.post-content blockquote p, .content-preview blockquote p {
+    margin-bottom: 0;
 }
 
-/* 구분선 스타일 */
-.post-content hr,
-.content-preview hr {
+.post-content hr, .content-preview hr {
     border: none;
-    border-top: 2px solid #e1e4e8;
-    margin: 2rem 0;
+    border-top: 2px solid #e9ecef;
+    margin: 2.5rem 0;
 }
 
-/* 리스트 스타일 개선 */
-.post-content ul,
-.content-preview ul {
-    list-style-type: disc;
-}
+.post-content ul, .content-preview ul { list-style-type: disc; }
+.post-content ol, .content-preview ol { list-style-type: decimal; }
 
-.post-content ol,
-.content-preview ol {
-    list-style-type: decimal;
-}
 
-.post-content li,
-.content-preview li {
-    line-height: 1.6;
-}
-
-/* 중첩 리스트 */
-.post-content li ul,
-.post-content li ol,
-.content-preview li ul,
-.content-preview li ol {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-/* 글쓰기 스타일 개선 */
-.post-write {
-    max-width: 1200px;
+/* 글쓰기 및 수정 페이지 공통 스타일 */
+.post-write, .post-edit {
+    max-width: 1000px;
     margin: 0 auto;
-    animation: fadeIn 0.5s ease;
-    display: flex; /* 추가: 내부 요소 정렬 */
-    flex-direction: column; /* 추가: 수직 정렬 */
-    /* height: calc(100vh - 180px); /* 헤더, 푸터, 패딩 대략적인 높이 제외. main에 flex:1로 대체 */
-    /* padding-bottom: 2rem; /* 푸터와의 간격 확보 */
+    animation: fadeIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
-.post-write h2 {
+.post-write h2, .post-edit h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: #343a40;
+    text-align: center;
 }
+
+.form-group { /* 카테고리 선택 등에 사용 */
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+/* 카테고리 선택을 위한 래퍼 */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.directory-select-input {
+    width: 100%;
+    padding: 0.8rem 2.5rem 0.8rem 1rem; /* 오른쪽 패딩은 화살표 공간 */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.select-wrapper::after { /* 커스텀 화살표 */
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+}
+
+.directory-select-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 
 .title-input {
     width: 100%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    border: 1px solid #ddd;
+    padding: 0.8rem 1rem;
+    font-size: 1.25rem;
+    border: 1px solid #ced4da;
     border-radius: 4px;
     margin-bottom: 1.5rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .title-input:focus {
     outline: none;
-    border-color: #0066cc;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
+
+.title-input-readonly { /* 수정 불가 제목 필드 */
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.title-input-readonly:focus {
+    border-color: #ced4da; /* 기본 테두리 색상 유지 */
+    box-shadow: none;       /* 포커스 시 그림자 제거 */
+}
+
 
 .editor-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 두 컬럼 동일 비율 */
-    gap: 1rem;
-    flex-grow: 1; /* 남은 공간을 채우도록 변경 */
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    flex-grow: 1;
     margin-bottom: 1.5rem;
-    min-height: 400px; /* 최소 높이 설정, 내용이 적을 때 너무 작아지지 않도록 */
+    min-height: 500px;
 }
 
 .editor-section,
 .preview-section {
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* 컬럼 내용이 넘칠 때 다른 컬럼 크기 유지 */
-    overflow: hidden; /* 내부 스크롤을 위해 h3 제외 영역에서 스크롤 */
+    min-width: 0;
+    overflow: hidden;
 }
 
 .editor-section h3,
 .preview-section h3 {
-    padding: 1rem;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ddd;
-    font-size: 1rem;
-    color: #666;
-    flex-shrink: 0; /* h3 크기 고정 */
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 600;
+    flex-shrink: 0;
 }
 
 .content-editor {
-    flex-grow: 1; /* 남은 공간 채우기 */
+    flex-grow: 1;
     padding: 1rem;
-    font-size: 1rem;
-    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.95rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     border: none;
     resize: none;
     outline: none;
-    overflow-y: auto; /* 내부 스크롤 */
-}
-
-.content-preview {
-    flex-grow: 1; /* 남은 공간 채우기 */
-    padding: 1rem;
-    overflow-y: auto; /* 내부 스크롤 */
-    font-size: 1rem;
     line-height: 1.6;
+    overflow-y: auto;
+    color: #212529;
 }
 
-/* 미리보기 마크다운 스타일 (글보기와 동일하게 적용) */
-.content-preview h1,
-.content-preview h2,
-.content-preview h3,
-.content-preview h4,
-.content-preview h5,
-.content-preview h6 {
-    margin: 1rem 0 0.5rem;
-    color: #333;
-    font-weight: 600;
+.content-preview { /* 미리보기 영역은 .post-content와 스타일 공유 */
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    /* font-size, line-height 등은 .post-content에서 상속받거나 여기서 개별 지정 */
 }
-
-.content-preview h1 {
-    font-size: 1.8rem;
-}
-.content-preview h2 {
-    font-size: 1.5rem;
-}
-.content-preview h3 {
-    font-size: 1.3rem;
-}
-.content-preview h4 {
-    font-size: 1.1rem;
-}
-
-.content-preview p {
-    margin-bottom: 1rem;
-}
-
-/* .content-preview pre, .content-preview code, .content-preview table 등은
-   .post-content 의 스타일을 공유하거나 동일하게 적용 */
 
 .button-group {
     display: flex;
     gap: 1rem;
-    margin-top: auto; /* 글쓰기 페이지에서 버튼 그룹을 하단에 위치시키도록 */
-    padding-top: 1rem; /* 버튼 그룹 위쪽 여백 */
+    margin-top: auto;
+    padding-top: 1.5rem;
+    justify-content: flex-end;
 }
 
 .submit-btn,
@@ -646,44 +670,52 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
 }
 
 .submit-btn {
-    background-color: #0066cc;
+    background-color: #007bff;
     color: #fff;
 }
 
 .submit-btn:hover:not(:disabled) {
-    background-color: #0052a3;
+    background-color: #0056b3;
 }
 
 .submit-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.65;
     cursor: not-allowed;
 }
 
 .cancel-btn {
-    background-color: #f0f0f0;
-    color: #666;
+    background-color: #6c757d;
+    color: #fff;
 }
 
 .cancel-btn:hover {
-    background-color: #e0e0e0;
+    background-color: #5a6268;
 }
 
 /* 푸터 스타일 */
 .footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #343a40;
+    color: #adb5bd;
     padding: 2rem 0;
-    /* margin-top: auto; /* main 컨텐츠가 적을 때도 푸터가 하단에 고정되도록 */
-    flex-shrink: 0; /* 푸터 크기가 줄어들지 않도록 */
+    flex-shrink: 0;
+    text-align: center;
 }
 
 .footer p {
-    text-align: center;
     font-size: 0.9rem;
+}
+.footer a {
+    color: #dee2e6;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
 }
 
 /* 로딩 상태 */
@@ -691,37 +723,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-size: 1.2rem;
-    color: #666;
+    min-height: calc(100vh - 60px - 82px - 4rem); /* 헤더,푸터,메인패딩 제외 */
+    font-size: 1.25rem;
+    color: #6c757d;
 }
 
 /* 빈 상태 */
 .no-posts {
     text-align: center;
-    padding: 3rem;
-    color: #999;
+    padding: 3rem 0;
+    color: #6c757d;
     font-size: 1.1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* 목차 (Table of Contents) 스타일 */
 .toc {
     position: sticky;
-    top: 80px; /* Adjust based on header height + some padding */
-    width: 250px;
+    top: 80px;
+    width: 280px;
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    margin-left: 20px; /* Space between content and TOC */
-    max-height: calc(100vh - 100px); /* Adjust to fit screen height, considering sticky header */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    margin-left: 20px; /* PostView와의 간격 */
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
+    flex-shrink: 0;
 }
 
 .toc h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #343a40;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .toc ul {
@@ -730,45 +768,54 @@ body {
 }
 
 .toc li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .toc a {
     display: block;
-    padding: 0.3rem 0;
-    color: #666;
+    padding: 0.4rem 0.2rem;
+    color: #495057;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    border-left: 2px solid transparent;
-    padding-left: 8px;
-    font-size: 0.95rem; /* Adjust font size */
+    transition: all 0.15s ease-in-out;
+    border-left: 3px solid transparent;
+    padding-left: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-break: break-word;
 }
+.toc li.toc-level-1 a { font-weight: 500; }
+.toc li.toc-level-2 a { padding-left: 22px; }
+.toc li.toc-level-3 a { padding-left: 32px; font-size: 0.85rem; }
 
-.toc li.active a {
-    color: #0066cc;
+
+.toc li.active > a {
+    color: #007bff;
     font-weight: 600;
-    border-left-color: #0066cc;
+    border-left-color: #007bff;
 }
 
 .toc a:hover {
-    color: #0066cc;
+    color: #007bff;
+    background-color: #f8f9fa;
 }
 
 /* 포트폴리오 페이지 스타일 */
 .portfolio-page {
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.5s ease-out;
     padding-bottom: 2rem;
 }
 
 .portfolio-page h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #343a40;
+    text-align: center;
 }
-.portfolio-page > p { /* 직계 자식 p 태그에만 적용 */
-    margin-bottom: 2rem;
+.portfolio-page > p {
+    margin-bottom: 2.5rem;
     font-size: 1.1rem;
-    color: #666;
+    color: #6c757d;
+    text-align: center;
 }
 
 .portfolio-grid {
@@ -776,46 +823,87 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
 }
+.portfolio-item-link {
+    text-decoration: none;
+    color: inherit;
+}
 
 .portfolio-item {
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 0;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .portfolio-image {
     width: 100%;
-    height: auto;
-    max-height: 200px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .portfolio-item h3 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #333;
+    margin: 1rem 1.25rem 0.5rem;
+    color: #343a40;
 }
 
 .portfolio-item p {
-    color: #666;
+    color: #495057;
     font-size: 0.95rem;
     line-height: 1.5;
+    padding: 0 1.25rem 1.25rem;
+    flex-grow: 1;
 }
 
 /* 댓글 섹션 스타일 */
 .comments-section {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     padding-top: 2rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #e9ecef;
+}
+
+/* 본문 아래 "목록으로" 버튼 컨테이너 */
+.post-actions-bottom {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: center; /* 버튼 중앙 정렬 */
+}
+/* .post-actions-bottom 내부 .back-btn 은 기존 .back-btn 스타일 상속 */
+
+
+/* 에러 메시지 스타일 (PostEdit 등) */
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 1rem 1.25rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message .back-btn {
+    border-color: #721c24;
+    color: #721c24;
+}
+.error-message .back-btn:hover {
+    background-color: #721c24;
+    color: #fff;
 }
 
 
@@ -823,7 +911,7 @@ body {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
@@ -832,125 +920,85 @@ body {
 }
 
 /* 반응형 디자인 */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) { /* 태블릿 사이즈 */
     .post-view-layout {
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .post-view {
-        max-width: 90%;
+        max-width: 100%;
+        padding: 2rem;
     }
 
     .toc {
-        position: relative; /* sticky 해제 */
+        position: relative;
         top: auto;
-        width: 90%;
+        width: 100%;
+        max-width: 800px; /* PostView 와 유사한 너비로 */
         max-height: none;
         margin-left: 0;
-        margin-top: 1rem; /* Add some space above TOC on smaller screens */
+        margin-top: 1rem;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* 모바일 사이즈 */
     .header .container {
-        padding: 0.75rem 15px;
-    }
-
-    .logo {
-        font-size: 1.25rem;
-    }
-
-    .nav {
-        gap: 0.5rem;
-    }
-
-    .nav-btn {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .post-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .editor-container {
-        grid-template-columns: 1fr; /* 모바일에서는 세로로 쌓이도록 */
-        grid-template-rows: auto auto; /* 각 섹션이 필요한 만큼 높이 차지 */
-        height: auto; /* 고정 높이 제거 */
-        min-height: 600px; /* 모바일 환경에서의 최소 높이 */
-    }
-
-    .editor-section, .preview-section {
-        min-height: 300px; /* 모바일에서 각 섹션의 높이, 또는 필요시 조정 */
-    }
-
-
-    .post-view {
-        padding: 1.5rem;
-    }
-
-    /* .post-header h1 은 사용되지 않으므로 삭제 또는 PostView 내부 h1 스타일 확인 */
-    /* .post-header h1 {
-        font-size: 1.5rem;
-    } */
-
-    .post-content {
-        font-size: 1rem;
-    }
-
-    /* 모바일에서 표 스크롤 가능하도록 */
-    .post-content table,
-    .content-preview table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .post-content table tbody,
-    .content-preview table tbody,
-    .post-content table thead,
-    .content-preview table thead { /* thead도 추가 */
-        display: table; /* display:blockだとレイアウトが崩れるのでtableに戻す */
-        width: 100%; /* tbody, thead가 테이블처럼 보이게 */
-    }
-
-
-    .post-content pre,
-    .content-preview pre {
-        padding: 0.75rem;
-        font-size: 0.85rem;
-    }
-
-    .button-group {
-        flex-direction: column;
-    }
-
-    .submit-btn,
-    .cancel-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
+        height: 56px;
         padding: 0 15px;
     }
+    .logo { font-size: 1.5rem; }
+    .nav { gap: 0.25rem; }
+    .nav-btn { padding: 0.5rem 0.6rem; font-size: 0.9rem;}
 
-    .post-view {
-        padding: 1rem;
+    .hero h2 { font-size: 2.2rem; }
+    .hero p { font-size: 1.1rem; }
+
+    .post-grid { grid-template-columns: 1fr; }
+
+    .editor-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        min-height: auto;
+    }
+    .editor-section, .preview-section {
+        min-height: 350px;
     }
 
-    .title-input {
-        font-size: 1rem;
+    .post-view { padding: 1.5rem; }
+    .post-content, .content-preview { font-size: 1rem; line-height: 1.75; }
+
+    /* 모바일에서 테이블 스크롤 */
+    .table-wrapper table { /* parseMarkdown이 생성하는 wrapper 내의 table */
+        /* display: block; -> 이 속성은 table 레이아웃을 깨뜨릴 수 있음 */
+        /* overflow-x: auto; -> .table-wrapper 에서 이미 처리 */
+        /* white-space: nowrap; -> 내용이 길 경우 필요할 수 있으나, 기본적으로는 wrap */
+    }
+
+
+    .post-content pre, .content-preview pre { padding: 1rem; font-size: 0.875rem; }
+    .post-content code, .content-preview code { font-size: 0.825em; }
+
+    .button-group { flex-direction: column; }
+    .submit-btn, .cancel-btn { width: 100%; }
+
+    .toc { max-width: 100%; }
+}
+
+@media (max-width: 480px) { /* 더 작은 모바일 */
+    .container { padding: 0 15px; }
+    .post-view { padding: 1rem; }
+    .title-input, .directory-select-input { font-size: 1rem; padding: 0.7rem 0.9rem; }
+    .post-content, .content-preview { font-size: 0.95rem; }
+    .post-content h1, .content-preview h1 {font-size: 1.6em;}
+    .post-content h2, .content-preview h2 {font-size: 1.4em;}
+    .post-content h3, .content-preview h3 {font-size: 1.2em;}
+
+    .editor-section, .preview-section {
+        min-height: 300px;
+    }
+    .content-editor, .content-preview { /* 미리보기는 상속된 .post-content 스타일이 우선될 수 있음 */
+        font-size: 0.9rem;
     }
 }

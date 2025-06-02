@@ -1,0 +1,133 @@
+/* src/styles/PostView.css */
+.post-view-layout {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+    align-items: flex-start;
+}
+
+.post-view { /* 실제 글 내용 컨테이너 */
+    flex-grow: 1;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.post-view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 또는 baseline */
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.post-view .post-date { /* PostView 컴포넌트 내 날짜 스타일 */
+    font-size: 1rem;
+    color: #666;
+    margin: 0; /* 수직 정렬을 위해 추가 */
+}
+
+.back-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #0066cc;
+    color: #0066cc;
+}
+
+/* 목차 (Table of Contents) 스타일 - PostView와 함께 사용되므로 여기에 포함 또는 별도 TOC.css */
+.toc {
+    position: sticky;
+    top: 80px; /* 헤더 높이 + 여백 고려 */
+    width: 250px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-left: 20px;
+    max-height: calc(100vh - 100px); /* 화면 높이에 맞게 조절 */
+    overflow-y: auto;
+}
+
+.toc h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+}
+
+.toc li {
+    margin-bottom: 0.5rem;
+}
+
+.toc a {
+    display: block;
+    padding: 0.3rem 0;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+    font-size: 0.95rem;
+}
+
+.toc li.active a {
+    color: #0066cc;
+    font-weight: 600;
+    border-left-color: #0066cc;
+}
+
+.toc a:hover {
+    color: #0066cc;
+}
+
+
+/* PostView 관련 반응형 */
+@media (max-width: 1024px) {
+    .post-view-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .post-view {
+        max-width: 90%; /* 화면 너비에 맞게 조절 */
+    }
+    .toc {
+        position: relative;
+        top: auto;
+        width: 90%; /* 화면 너비에 맞게 조절 */
+        max-height: none;
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-view {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-view {
+        padding: 1rem;
+    }
+}

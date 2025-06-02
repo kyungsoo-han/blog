@@ -53,7 +53,7 @@ jobs:
           echo "🚀 Starting app via serve on port $PORT..."
           ssh -i private_key.pem -o StrictHostKeyChecking=no $REMOTE_USER@$SERVER_IP "
             cd $REMOTE_DIR &&
-            nohup npx serve -s . -l $PORT > serve.log 2>&1 &
+            (nohup serve -s . -l $PORT > serve.log 2>&1 &) </dev/null &
           "
 
           echo "✅ Deployed! Visit: http://$SERVER_IP:$PORT"

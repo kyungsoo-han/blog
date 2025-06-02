@@ -1,0 +1,70 @@
+/* src/styles/Header.css */
+.header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header .container { /* 헤더 내 컨테이너 스타일 (global.css의 .container를 확장/덮어쓰기 가능) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px; /* global.css의 .container 패딩과 다를 수 있음 */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.logo:hover {
+    color: #0066cc;
+}
+
+.nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.nav-btn:hover {
+    color: #0066cc;
+    background-color: #f0f0f0;
+}
+
+.nav-btn.active {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+/* Header 관련 반응형 */
+@media (max-width: 768px) {
+    .header .container {
+        padding: 0.75rem 15px;
+    }
+    .logo {
+        font-size: 1.25rem;
+    }
+    .nav {
+        gap: 0.5rem;
+    }
+    .nav-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
