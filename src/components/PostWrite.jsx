@@ -34,7 +34,7 @@ const PostWrite = ({ onNavigate }) => {
       return;
     }
     try {
-      const response = await fetch(`${API_HANDLER_URL}/create-post`, {
+      const response = await fetch(`${API_HANDLER_URL}/api/create-post`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
