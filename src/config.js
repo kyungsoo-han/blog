@@ -16,4 +16,4 @@ export const GITHUB_OAUTH_CLIENT_ID = "Ov23li2TxE2go0b45XMs";
 // 배포 시: https://your-blog-domain.com/ (또는 특정 콜백 경로)
 export const GITHUB_OAUTH_REDIRECT_URI =
   import.meta.env.VITE_GITHUB_OAUTH_REDIRECT_URI ||
-  "http://39.117.246.63:50011/callback";
+  "https://note.hanks.kr/callback";
