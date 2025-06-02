@@ -44,6 +44,18 @@ const Header = ({
         >
           포트폴리오
         </button>
+        <button
+          className="nav-btn"
+          onClick={() => {
+            window.open(
+              "https://github.com/kyungsoo-han",
+              "_blank",
+              "noopener,noreferrer",
+            );
+          }}
+        >
+          GitHub
+        </button>
       </nav>
       <div className="auth-section">
         {currentUser ? (
