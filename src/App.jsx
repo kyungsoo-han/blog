@@ -19,6 +19,7 @@ import PostView from "./components/PostView";
 import PostWrite from "./components/PostWrite";
 import PostEdit from "./components/PostEdit";
 import Portfolio from "./components/Portfolio";
+import PlanningCalendar from "./components/PlanningCalendar"; // 새로 추가된 컴포넌트 임포트
 
 const App = () => {
   // 페이지 및 콘텐츠 상태
@@ -473,6 +474,8 @@ const App = () => {
 
               {currentPage === "portfolio" && <Portfolio />}
 
+              {/* 플래너 페이지 렌더링 추가 */}
+              {currentPage === "planner" && <PlanningCalendar />}
               {currentPage === "view" && selectedPost && (
                 <PostView
                   post={selectedPost}
