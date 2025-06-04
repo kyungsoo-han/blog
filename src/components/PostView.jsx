@@ -4,8 +4,13 @@ import { API_HANDLER_URL } from "../config";
 import { parseMarkdown } from "../utils/markdownParser";
 import TableOfContents from "./TableOfContents";
 import Comments from "./Comments";
+import { useParams, useNavigate } from "react-router-dom";
 
-const PostView = ({ post, onBack, onEdit, isAdmin }) => {
+const PostView = ({ posts, isAdmin }) => {
+  const { postName } = useParams();
+  const navigate = useNavigate();
+  const post = posts.find((p) => p.name === postName);
+
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [headings, setHeadings] = useState([]);
@@ -132,11 +137,14 @@ const PostView = ({ post, onBack, onEdit, isAdmin }) => {
           <div className="post-view-actions">
             {/* 관리자일 경우에만 수정 버튼 표시 */}
             {isAdmin && (
-              <button onClick={() => onEdit(post)} className="edit-btn">
+              <button
+                onClick={() => navigate(`/edit/${post?.name}`)}
+                className="edit-btn"
+              >
                 수정
               </button>
             )}
-            <button onClick={onBack} className="back-btn">
+            <button onClick={() => navigate("/posts")} className="back-btn">
               ← 목록으로
             </button>
           </div>
@@ -146,7 +154,7 @@ const PostView = ({ post, onBack, onEdit, isAdmin }) => {
           dangerouslySetInnerHTML={{ __html: content }}
         />
         <div className="post-actions-bottom">
-          <button onClick={onBack} className="back-btn">
+          <button onClick={() => navigate("/posts")} className="back-btn">
             ← 목록으로
           </button>
         </div>

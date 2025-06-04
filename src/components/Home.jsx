@@ -1,7 +1,8 @@
-// src/components/Home.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Home = ({ posts, onPostClick }) => {
+const Home = ({ posts }) => {
+  const navigate = useNavigate();
   const recentPosts = posts.slice(0, 8);
   return (
     <div className="home">
@@ -15,9 +16,11 @@ const Home = ({ posts, onPostClick }) => {
           {recentPosts.length > 0 ? (
             recentPosts.map((post) => (
               <article
-                key={post.path} // 또는 post.sha 등 고유한 값
+                key={post.path}
                 className="post-card"
-                onClick={() => onPostClick(post)}
+                onClick={() =>
+                  navigate(`/posts/${encodeURIComponent(post.name)}`)
+                }
               >
                 <h4>{post.title}</h4>
                 <p className="post-date">
