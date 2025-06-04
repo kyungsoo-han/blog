@@ -1,7 +1,9 @@
 // src/components/PostList.jsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PostList = ({ posts, onPostClick }) => {
+const PostList = ({ posts }) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
   const indexOfLastPost = currentPage * postsPerPage;
@@ -18,7 +20,9 @@ const PostList = ({ posts, onPostClick }) => {
             <article
               key={post.sha || post.path} // 고유한 key 사용
               className="post-item"
-              onClick={() => onPostClick(post)}
+              onClick={() =>
+                navigate(`/posts/${encodeURIComponent(post.name)}`)
+              }
             >
               <h3>{post.title}</h3>
               <p className="post-meta">

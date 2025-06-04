@@ -2,8 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { API_HANDLER_URL } from "../config";
 import { parseMarkdown } from "../utils/markdownParser";
+import { useNavigate, useParams } from "react-router-dom";
 
-const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
+const PostEdit = ({ posts, onUpdateSuccess }) => {
+  const { postName } = useParams();
+  const navigate = useNavigate();
+  const postToEdit = posts.find((p) => p.name === postName);
+
   const [title, setTitle] = useState(""); // 제목 상태는 유지 (표시용)
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -124,7 +129,7 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
           };
           onUpdateSuccess(updatedPostData);
         } else {
-          onNavigate("list");
+          navigate(`/posts/${postToEdit.name}`);
         }
       } else {
         // API 응답의 에러 메시지를 사용하도록 수정
@@ -148,7 +153,7 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
       <div className="error-message">
         오류: {error}{" "}
         <button
-          onClick={() => onNavigate("view", postToEdit)}
+          onClick={() => navigate(`/posts/${postToEdit.name}`)}
           className="back-btn"
         >
           원래 글로 돌아가기
@@ -200,7 +205,7 @@ const PostEdit = ({ postToEdit, onNavigate, onUpdateSuccess }) => {
           {isSubmitting ? "수정 중..." : "글 수정 완료"}
         </button>
         <button
-          onClick={() => onNavigate("view", postToEdit)}
+          onClick={() => navigate(`/posts/${postToEdit.name}`)}
           className="cancel-btn"
         >
           취소

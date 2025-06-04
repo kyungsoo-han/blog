@@ -1,31 +1,23 @@
-// src/components/Header.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Header = ({
-  onNavigate,
-  currentPage,
-  currentUser,
-  isAdmin,
-  onLogin,
-  onLogout,
-}) => {
+const Header = ({ currentUser, isAdmin, onLogin, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navRef = useRef(null); // 모바일 메뉴 외부 클릭 감지를 위해
+  const navRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen((open) => !open);
 
-  // 네비게이션 항목 클릭 시 모바일 메뉴 닫기
-  const handleNavAndCloseMenu = (page) => {
-    onNavigate(page);
+  // 메뉴 클릭 시 페이지 이동 + 메뉴 닫기
+  const handleNavAndCloseMenu = (to) => {
+    navigate(to);
     setIsMobileMenuOpen(false);
   };
 
-  // 모바일 메뉴 외부 클릭 시 메뉴 닫기 (선택적 고급 기능)
+  // 모바일 메뉴 외부 클릭 시 닫기
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // event.target.closest('.mobile-nav-toggle') : 햄버거 버튼 자체를 클릭한 경우는 제외
       if (
         navRef.current &&
         !navRef.current.contains(event.target) &&
@@ -34,13 +26,11 @@ const Header = ({
         setIsMobileMenuOpen(false);
       }
     };
-
     if (isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -49,48 +39,41 @@ const Header = ({
   return (
     <header className="header">
       <div className="container">
-        <h1 onClick={() => handleNavAndCloseMenu("home")} className="logo">
+        <h1 onClick={() => handleNavAndCloseMenu("/")} className="logo">
           My Blog
         </h1>
-
-        {/* 모바일용 햄버거 토글 버튼 */}
         <button
           className="mobile-nav-toggle"
           onClick={toggleMobileMenu}
           aria-label="네비게이션 메뉴 토글"
           aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? "✕" : "☰"} {/* 열렸을 때 X, 닫혔을 때 ☰ */}
+          {isMobileMenuOpen ? "✕" : "☰"}
         </button>
-
         <nav className={`nav ${isMobileMenuOpen ? "open" : ""}`} ref={navRef}>
           <button
-            className={`nav-btn ${currentPage === "home" ? "active" : ""}`}
-            onClick={() => handleNavAndCloseMenu("home")}
+            className={`nav-btn ${location.pathname === "/" ? "active" : ""}`}
+            onClick={() => handleNavAndCloseMenu("/")}
           >
             홈
           </button>
           <button
-            className={`nav-btn ${currentPage === "list" ? "active" : ""}`}
-            onClick={() => handleNavAndCloseMenu("list")}
+            className={`nav-btn ${location.pathname.startsWith("/posts") && location.pathname !== "/write" && location.pathname !== "/edit" ? "active" : ""}`}
+            onClick={() => handleNavAndCloseMenu("/posts")}
           >
             글목록
           </button>
           {isAdmin && (
             <button
-              className={`nav-btn ${
-                currentPage === "write" || currentPage === "edit"
-                  ? "active"
-                  : ""
-              }`}
-              onClick={() => handleNavAndCloseMenu("write")}
+              className={`nav-btn ${location.pathname === "/write" ? "active" : ""}`}
+              onClick={() => handleNavAndCloseMenu("/write")}
             >
               글쓰기
             </button>
           )}
           <button
-            className={`nav-btn ${currentPage === "portfolio" ? "active" : ""}`}
-            onClick={() => handleNavAndCloseMenu("portfolio")}
+            className={`nav-btn ${location.pathname === "/portfolio" ? "active" : ""}`}
+            onClick={() => handleNavAndCloseMenu("/portfolio")}
           >
             포트폴리오
           </button>
@@ -102,13 +85,11 @@ const Header = ({
                 "_blank",
                 "noopener,noreferrer",
               );
-              setIsMobileMenuOpen(false); // 외부 링크 클릭 시에도 메뉴 닫기
+              setIsMobileMenuOpen(false);
             }}
           >
             GitHub
           </button>
-
-          {/* 인증 관련 UI (모바일 메뉴의 일부가 됨) */}
           <div className="nav-auth-item">
             {currentUser ? (
               <div className="user-profile">
