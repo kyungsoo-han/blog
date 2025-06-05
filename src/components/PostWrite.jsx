@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { API_HANDLER_URL } from "../config"; // 경로 수정
 import { parseMarkdown } from "../utils/markdownParser";
+import { useNavigate } from "react-router-dom";
 
-const PostWrite = ({ onNavigate }) => {
+const PostWrite = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,7 +51,7 @@ const PostWrite = ({ onNavigate }) => {
         alert(
           `글이 성공적으로 '${targetDirectory === "_posts" ? "글" : "자료"}' 카테고리에 등록되었습니다! (${responseData.message || ""})`,
         );
-        onNavigate("list");
+        navigate("/posts");
       } else {
         throw new Error(
           responseData.message ||
@@ -122,7 +124,7 @@ const PostWrite = ({ onNavigate }) => {
         >
           {isSubmitting ? "등록 중..." : "글 등록"}
         </button>
-        <button onClick={() => onNavigate("list")} className="cancel-btn">
+        <button onClick={() => navigate("/posts")} className="cancel-btn">
           취소
         </button>
       </div>
