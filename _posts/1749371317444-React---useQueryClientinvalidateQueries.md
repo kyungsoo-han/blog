@@ -1,14 +1,11 @@
 # React - useQueryClient().invalidateQueries
 
-  
-
-  
 React Query의 `queryClient.invalidateQueries()`는 **특정 queryKey에 해당하는 캐시를 무효화**하여 `useQuery`가 자동으로 다시 데이터를 fetch 하게 만드는 함수입니다.
 
 ```ts
 const queryClient = useQueryClient()
 queryClient.invalidateQueries({ queryKey: ["commCodeList"] })
-```
+``` 
 
 ### 🚀 효과
 
